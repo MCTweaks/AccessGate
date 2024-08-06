@@ -6,6 +6,7 @@ class Accounts {
     constructor(platform) {
         switch (platform) {
             case 'arkasphere':
+                // eslint-disable-next-line no-undef
                 this.filePath = path.join(__dirname, './credentials/arkasphere/accounts.json');  
                 break;
             // case 'server':
@@ -25,6 +26,7 @@ class Accounts {
             return JSON.parse(jsonData);
         } catch (error) {
             // If the file doesn't exist or is empty, return an empty array
+            console.error();(error);
             return [];
         }
     }

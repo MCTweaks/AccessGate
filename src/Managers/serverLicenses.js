@@ -6,6 +6,7 @@ class serverLicenses {
     constructor(platform) {
         switch (platform) {
             case 'mcuniversal':
+                // eslint-disable-next-line no-undef
                 this.filePath = path.join(__dirname, './credentials/mcuniversal/ServerLicenses.json');  
                 break;
             // case 'server':
@@ -24,6 +25,7 @@ class serverLicenses {
             return JSON.parse(jsonData);
         } catch (error) {
             // If the file doesn't exist or is empty, return an empty array
+            console.error(error);
             return [];
         }
     }

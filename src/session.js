@@ -28,20 +28,6 @@ class Session {
 
     }
 
-
-
-    logout(userData) {
-
-        try {
-
-
-        } catch (error) {
-            console.log(error);
-        }
-
-    }
-
-
     error(message) {
         return this.res.status(401).json({ status: 'FAILED', reason: message });
     }

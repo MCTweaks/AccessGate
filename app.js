@@ -2,10 +2,10 @@ const express = require('express');
 const app = express();
 const dotenv = require('dotenv');
 dotenv.config({ path: '.env' });
+// eslint-disable-next-line no-undef
 const port = process.env.PORT;
 
 const http = require("http").createServer(app);
-const path = require('path')
 const cookieParser = require("cookie-parser");
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -35,7 +35,7 @@ let modulesLoaded = false;
 
 try {
     const endpoints = require('./endpoints.js');  endpoints(app);
-    
+
     app.get('/application/assets/servefile', (req, res) => {
         new Utility(req, res).serveFile();
     })
@@ -47,17 +47,16 @@ try {
 
 if (modulesLoaded) {
     try {
-        app.use((req, res, next) => {
+        app.use((req, res) => {
             new Utility(req, res).error();
         });
     } catch (error) {
         console.error("Error loading routes:", error);
-        res.status(500).send('Something went wrong!');
     }
 }
 
 // Global error handler
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
     console.error(err.stack);
     res.status(500).send('Something went wrong!');
 });

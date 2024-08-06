@@ -10,12 +10,13 @@ This is the beginning of the future API called AccessGate it manages all of the 
 2. Run `npm install` to install the dependencies
 3. Run `npm start` to start the server
 
-## Current API Endpoints
+## API Application Endpoints
 ```http
-  POST /api/login/:platform/
-  POST /api/license/:platform/
-  POST /api/logout/:platform/
-  POST /api/session/:platform/
+  POST /api/application/authentication/login
+  POST /api/application/authentication/user-license
+  POST /api/application/authentication/server-license
+  POST /api/application/authentication/logout
+  POST /api/application/authentication/session
 ```
 
 ## Usages
@@ -32,6 +33,4 @@ This is the beginning of the future API called AccessGate it manages all of the 
 ```
 
 ## Somewhat Planned
-
-## Integration with Payment Systems**
-``` [ ] Support integration with payment gateways for license purchases, renewals, and upgrades.```
+``` [ ] Integration with Payment Systems: Support integration with payment gateways for license purchases, renewals, and upgrades.```

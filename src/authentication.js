@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
-const PlatformManager = require('./Managers/accountManager.js');
-const LicensesManager = require('./Managers/userLicenses.js');
+const AccountManager = require('./Managers/accountManager.js');
+const serverLicenses = require('./Managers/serverLicenses.js');
 
 class Authentication {
   constructor(request, response) {
@@ -16,7 +16,7 @@ class Authentication {
 
     try {
       // Find the user by username
-      const userDB = new PlatformManager();
+      const userDB = new AccountManager();
       const user = await userDB.getUserByUsername(Username);
       
       if (!user) {
@@ -128,7 +128,7 @@ class Authentication {
   async Userlicenses() {
     const { UUID, Secret } = this.req.body;
     try {
-        const userDB = new LicensesManager();
+        const userDB = new serverLicenses();
         const user = await userDB.getUUID(UUID);
 
         if (!user) {

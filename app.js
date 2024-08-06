@@ -29,12 +29,17 @@ const allowedOrigins = [
   
 app.use(cors(corsOptions));
 
-
+const Utility = require('./Utilites/utility.js')
 // Example modules handling routes under /api/secure/chat
 let modulesLoaded = false;
 
 try {
     const endpoints = require('./endpoints.js');  endpoints(app);
+    
+    app.get('/application/assets/servefile', (req, res) => {
+        new Utility(req, res).serveFile();
+    })
+
     modulesLoaded = true;
 } catch (error) {
     console.error("Error loading modules:", error);
@@ -43,8 +48,7 @@ try {
 if (modulesLoaded) {
     try {
         app.use((req, res, next) => {
-            const Error = require('./404/error.js')
-            new Error(req, res);
+            new Utility(req, res).error();
         });
     } catch (error) {
         console.error("Error loading routes:", error);

@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
-const PlatformManager = require('./Managers/AccountManager.js');
-const LicensesManager = require('./Managers/UserLicenses.js');
+const PlatformManager = require('./Managers/accountManager.js');
+const LicensesManager = require('./Managers/userLicenses.js');
 
 class Authentication {
   constructor(request, response) {

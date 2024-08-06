@@ -1,4 +1,4 @@
-const UserDatabase = require('./Managers/AccountManager.js');
+const UserDatabase = require('./Managers/accountManager.js');
 
 class Session {
     constructor(request, response) {

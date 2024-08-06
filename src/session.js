@@ -1,4 +1,4 @@
-const UserDatabase = require('./Managers/accountManager.js');
+const Accounts = require('./Managers/accounts.js');
 
 class Session {
     constructor(request, response) {
@@ -10,7 +10,7 @@ class Session {
         const { ArkaSphere_SessionID, ArkaSphere_SessionToken } = this.req.cookies;
 
         try {
-            const userDB = new UserDatabase();
+            const userDB = new Accounts('arkasphere');
             const tokens = await userDB.checkUserTokens(ArkaSphere_SessionToken, ArkaSphere_SessionID);
 
             if (tokens) {

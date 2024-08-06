@@ -1,11 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 const bcrypt = require('bcrypt');
-// const UserManager = require('../../AccessGate/src/UserManager');
 
-// const filePath = path.join(__dirname, './Credentials.json');
-
-class PlatformManagers {
+class Accounts {
     constructor(platform) {
         switch (platform) {
             case 'arkasphere':
@@ -15,10 +12,11 @@ class PlatformManagers {
             //     this.filePath = path.join(__dirname, './Servers.json');
             //     break;
             default:
-                throw new Error('Invalid platform type');
+                break;
         }
 
         this.usersData = this.readJSONFile();
+        this.hashPasswords()
     }
 
     readJSONFile() {
@@ -261,13 +259,5 @@ class PlatformManagers {
     }
 }
 
-(async () => {
-    try {
-        const userManager = new UserManager()
-        await userManager.hashPasswords();
-    } catch (error) {
-        console.error("Error hashing passwords:", error);
-    }
-})();
 
-module.exports = PlatformManagers;
+module.exports = Accounts;

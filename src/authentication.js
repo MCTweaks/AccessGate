@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const AccountManager = require('./Managers/accountManager.js');
+const Accounts = require('./Managers/accounts.js');
 const serverLicenses = require('./Managers/serverLicenses.js');
 
 class Authentication {
@@ -16,7 +16,7 @@ class Authentication {
 
     try {
       // Find the user by username
-      const userDB = new AccountManager();
+      const userDB = new Accounts('arkasphere');
       const user = await userDB.getUserByUsername(Username);
       
       if (!user) {
@@ -44,7 +44,7 @@ class Authentication {
       const userData = await userDB.fetchUserData(UUID);
 
       //  Testing to see if we can send the cookies to the client
-      const time = require('../../com.arkasphere/utilites/time.js');
+      const time = require('../../V2/src/node/com.arkasphere/utilites/time.js');
       const days = new time();
 
       // Calculate expiration time for cookies
@@ -128,7 +128,7 @@ class Authentication {
   async Userlicenses() {
     const { UUID, Secret } = this.req.body;
     try {
-        const userDB = new serverLicenses();
+        const userDB = new serverLicenses('mcuniversal');
         const user = await userDB.getUUID(UUID);
 
         if (!user) {

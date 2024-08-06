@@ -1,9 +1,8 @@
+const fs = require('fs');
+const path = require('path');
 const bcrypt = require('bcrypt');
-// const userDataPath = require('./Credentials.json'); // New Path
 
-// const filePath = path.join(__dirname, './Licenses.json');
-
-class LicensesManager {
+class serverLicenses {
     constructor(platform) {
         switch (platform) {
             case 'mcuniversal':
@@ -13,14 +12,15 @@ class LicensesManager {
             //     this.filePath = path.join(__dirname, './Servers.json');
             //     break;
             default:
-                throw new Error('Invalid platform type');
+                break;
         }
 
         this.usersData = this.readJSONFile();
+        this.hashSecureKeys(); 
     }
     readJSONFile() {
         try {
-            const jsonData = fs.readFileSync(filePath, 'utf8');
+            const jsonData = fs.readFileSync(this.filePath, 'utf8');
             return JSON.parse(jsonData);
         } catch (error) {
             // If the file doesn't exist or is empty, return an empty array
@@ -29,7 +29,7 @@ class LicensesManager {
     }
 
     writeJSONFile(data) {
-        fs.writeFileSync(filePath, JSON.stringify(data));
+        fs.writeFileSync(this.filePath, JSON.stringify(data));
     }
     async hashSecureKeys() {
         const users = this.readJSONFile();
@@ -57,15 +57,4 @@ class LicensesManager {
 
 }
 
-
-(async () => {
-    try {
-        const userDB = new LicenseManager();
-        await userDB.hashSecureKeys();
-    } catch (error) {
-        console.error("Error hashing passwords:", error);
-    }
-})();
-
-
-module.exports = LicensesManager;
+module.exports = serverLicenses;
